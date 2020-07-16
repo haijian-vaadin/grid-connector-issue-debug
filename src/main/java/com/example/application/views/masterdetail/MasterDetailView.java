@@ -55,21 +55,25 @@ public class MasterDetailView extends Div {
 }
 
 class MyCustomField extends CustomField<Person> {
-    
+    private Grid<Person> grid;
     public MyCustomField(Grid<Person> grid) {
-        super();
+        this.grid = grid;
         add(grid);
+        
     }
 
     @Override
     protected Person generateModelValue() {
         // TODO Auto-generated method stub
+        if(grid!=null && !grid.getSelectedItems().isEmpty()){
+            return grid.getSelectedItems().iterator().next();
+        }
         return null;
     }
 
     @Override
     protected void setPresentationValue(Person arg0) {
         // TODO Auto-generated method stub
-
+        grid.select(arg0);
     }
 }
